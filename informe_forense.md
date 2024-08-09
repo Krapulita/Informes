@@ -1,6 +1,6 @@
 ## Informe Forense
 Autor: Francisca Molina  
-Cargo:  
+Cargo:  Analista de Seguridad   
 Contacto: fca.molinag@gmail.com     
 Fecha de Elaboración: 09/08/2024
 ___
@@ -40,12 +40,16 @@ ___
 ### Hallazgos
 + Evidencia digital: 
     + Se identificaron varios intentos de inicio de sesión fallidos desde una dirección IP específica en un corto período de tiempo.
+
     + El atacante logró acceder a una cuenta de usuario durante unos segundos, antes que se lograran implementar las medidas de mitigación.
 
-![Captura de Logs](C:\Users\PC IIA\Desktop\Nueva carpeta\logs.jpg)
+![Captura de Logs](/logs.jpg)
 
 + Análisis de la red:
     + Se identificó un aumento en el tráfico de inicio de sesión proveniente de la dirección IP del atacante
+
+![Tráfico Inusual](/wireshark.png)
+
 + Análisis de sistemas:
     + El sistema permitio múltiples intentos de inicio de sesión fallidos sin restricciones. Esta ausencia de medidas de protección como el uso de CAPTCHA, permitió al script ejecutar intentos múltiples.
 ___
@@ -69,3 +73,22 @@ ___
 + Revisión de políticas de contraseñas: Actualizar las políticas de contraseñas para que éstas sean robustas y seguras.
 + Auditorías de Seguridad: Realizar auditorías de seguridad periódicas para lograr identificar y corregir vulnerabildiades en el sistema.
 + Monitoreo Continuo: Establecer un sistema de monitoreo continuo para detectar y responder rápidamenete a actividades sospechosas.
+
+### Anexos
+
++ Extracto de código vulnerable en el login
+
+
+```php
+<form action="login.php" method="post">
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Correo electrónico</label>
+            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+            <input type="password" name="password" class="form-control" id="exampleInputPassword1" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+</form>
+```
