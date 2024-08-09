@@ -92,3 +92,23 @@ ___
     <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
 </form>
 ```
+
++ Diagrama de Flujo del Ataque
+
+```mermaid
+graph TD
+A[Inicio] --> B(Solicitud de Inicio de sesión)
+B --> C[Obtener Intentos fallidos]
+C --> D{Número de intentos > MAX_ATTEMPTS?}
+D -->|Si| E[Muestra mensaje de bloqueo temporal]
+E --> F[Registro de intento fallido]
+F --> G[Fin]
+D --> |No| H[Verificar Credenciales]
+h --> I{Credenciales correctas?}
+H --> |Si| J[Inicio de sesión exitoso]
+J --> K[Reestablecer contador de intentos]
+K --> G[Fin]
+I --> |No| L[Muestra mensaje de error]
+L --> F[Registro de intento fallido]
+F --> G[Fin]
+```
